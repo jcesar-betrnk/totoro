@@ -1,0 +1,16 @@
+[package]
+name = "pastilan"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.5.26", features = ["derive"] }
+clipboard-rs = "0.2.2"
+directories = "6.0.0"
+toml = "0.8.19"
+anyhow = "1.0.95"
+totp-rs = { version = "5.6.0", features = ["otpauth"] }
+base32 = "0.5.1"
+hmac = "0.12.1"
+sha1 = "0.10.6"
+base64 = "0.22.1"
