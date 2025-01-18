@@ -1,8 +1,18 @@
-## Pastilan
+## totoro
 a totp management tool
 
+## Usage
 
-### Prerequisite in linux
+Adding an entry
+
+```sh
+totoro add --domain <DOMAIN> --secret <SECRET>
+totoro add --domain "github" --secret "xlkasjdqjaqmx"
 ```
-sudo apt-get install xorg-dev
+
+Getting a totp value
+
+```sh
+totoro get --domain <DOMAIN>
+totoro get --domain "github"
 ```

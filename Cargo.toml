@@ -1,7 +1,11 @@
 [package]
-name = "pastilan"
+name = "totoro"
 version = "0.1.0"
 edition = "2021"
+author = ["Jovansonlee Cesar <ivanceras@gmail.com>"]
+description = "Manage totp auth for each domain in the command line"
+keywords = ["totp", "auth"]
+license = "MIT"
 
 [dependencies]
 clap = { version = "4.5.26", features = ["derive"] }

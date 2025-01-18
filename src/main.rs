@@ -5,12 +5,13 @@ use clipboard_rs::{Clipboard, ClipboardContext};
 use directories::ProjectDirs;
 use google_authenticator::GoogleAuthenticator;
 use std::fs;
+use std::io::Write;
 use std::path::PathBuf;
 use toml::{Table, Value};
 
 const QUAL: &str = "com";
 const ORG: &str = "ivanceras";
-const APP: &str = "pastilan";
+const APP: &str = env!("CARGO_PKG_NAME");
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -57,18 +58,22 @@ fn write_to_clipboard(content: &str) -> anyhow::Result<()> {
 
 fn read_toml_table() -> anyhow::Result<Table> {
     let filename = config_file()?;
-    let toml_content = fs::read_to_string(&filename)?;
-    let toml_value: Result<Value, _> = toml::from_str(&toml_content);
-    let Ok(Value::Table(table)) = toml_value else {
-        panic!("expecting valid key value toml format");
-    };
-    Ok(table)
+    if let Ok(toml_content) = fs::read_to_string(&filename) {
+        let toml_value: Result<Value, _> = toml::from_str(&toml_content);
+        let Ok(Value::Table(table)) = toml_value else {
+            panic!("expecting valid key value toml format");
+        };
+        Ok(table)
+    } else {
+        Ok(Table::new())
+    }
 }
 
 fn save_table_to_toml(table: &Table) -> anyhow::Result<()> {
     let content = toml::to_string(table).unwrap();
     let config_file = config_file()?;
-    fs::write(config_file, content)?;
+    let mut file = fs::File::create(config_file)?;
+    file.write_all(content.as_bytes())?;
     Ok(())
 }
 
