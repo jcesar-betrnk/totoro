@@ -1,18 +1,12 @@
+#![deny(warnings)]
+
 use clap::{Parser, Subcommand};
-use clipboard_rs::{Clipboard, ClipboardContext, ContentFormat};
+use clipboard_rs::{Clipboard, ClipboardContext};
 use directories::ProjectDirs;
 use std::fs;
 use std::path::PathBuf;
 use toml::Value;
-use clipboard_rs::ClipboardContextX11Options;
-use totp_rs::{Secret, TOTP, Rfc6238, Algorithm};
 use toml::Table;
-use base32;
-use hmac::{Hmac, Mac};
-use sha1::Sha1;
-use std::time;
-use base64::prelude::BASE64_STANDARD;
-use base64::Engine;
 use google_authenticator::GoogleAuthenticator;
 
 const QUAL: &str = "com";
@@ -54,12 +48,11 @@ fn config_file() -> anyhow::Result<PathBuf> {
 }
 
 fn write_to_clipboard(content: &str) -> anyhow::Result<()> {
-    println!("setting clipboard with content: {}",content);
     let ctx = ClipboardContext::new().expect("Could not get access clipboard");
     ctx.set_text(content.to_string())
         .expect("Could not set the text in the clipboard");
     // ISSUE: it seems it need to be read here in order to make it work
-    let clip = ctx.get_text().expect("Could not read the clipboard text");
+    let _clip = ctx.get_text().expect("Could not read the clipboard text");
     Ok(())
 }
 
@@ -89,11 +82,10 @@ fn copy_totp_to_clipboard(domain: &str) -> anyhow::Result<()> {
             let Value::String(secret) = value else {
                 panic!("must be a string");
             };
-            println!("secret: [{secret}]");
-
             let auth = GoogleAuthenticator::new();
             let code = auth.get_code(&secret, 0).unwrap();
-            println!("other code: {code}");
+            write_to_clipboard(&code)?;
+            println!("{code}");
         }
         None => {
             println!("There is no such domain");
