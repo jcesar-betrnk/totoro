@@ -3,11 +3,10 @@
 use clap::{Parser, Subcommand};
 use clipboard_rs::{Clipboard, ClipboardContext};
 use directories::ProjectDirs;
+use google_authenticator::GoogleAuthenticator;
 use std::fs;
 use std::path::PathBuf;
-use toml::Value;
-use toml::Table;
-use google_authenticator::GoogleAuthenticator;
+use toml::{Table, Value};
 
 const QUAL: &str = "com";
 const ORG: &str = "ivanceras";
@@ -66,13 +65,12 @@ fn read_toml_table() -> anyhow::Result<Table> {
     Ok(table)
 }
 
-fn save_table_to_toml(table: &Table) -> anyhow::Result<()>{
+fn save_table_to_toml(table: &Table) -> anyhow::Result<()> {
     let content = toml::to_string(table).unwrap();
     let config_file = config_file()?;
     fs::write(config_file, content)?;
     Ok(())
 }
-
 
 fn copy_totp_to_clipboard(domain: &str) -> anyhow::Result<()> {
     let table = read_toml_table()?;
@@ -94,7 +92,7 @@ fn copy_totp_to_clipboard(domain: &str) -> anyhow::Result<()> {
     Ok(())
 }
 
-fn add_totp_entry(domain: &str, secret: &str) -> anyhow::Result<()>{
+fn add_totp_entry(domain: &str, secret: &str) -> anyhow::Result<()> {
     let mut table = read_toml_table()?;
     table.insert(domain.to_string(), secret.into());
     save_table_to_toml(&table)?;
