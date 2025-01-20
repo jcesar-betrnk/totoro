@@ -69,9 +69,21 @@ fn read_toml_table() -> anyhow::Result<Table> {
     }
 }
 
+fn ensure_config_dir_exists() -> anyhow::Result<()>{
+    let config_file = config_file()?;
+    let prefix = config_file.parent().expect("must have a parent directory for config file");
+    match fs::create_dir_all(prefix){
+        Ok(_) => Ok(()),
+        Err(_) => {
+            panic!("Unable to create directory: {}", prefix.display());
+        }
+    }
+}
+
 fn save_table_to_toml(table: &Table) -> anyhow::Result<()> {
     let content = toml::to_string(table).unwrap();
     let config_file = config_file()?;
+    ensure_config_dir_exists()?;
     let mut file = fs::File::create(config_file)?;
     file.write_all(content.as_bytes())?;
     Ok(())

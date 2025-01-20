@@ -21,6 +21,7 @@ totoro add --domain "github" --secret "xlkasidioqweqwp"
 Alternatively, you can directly edit the configuration file:
 - Linux: `~/.config/totoro.toml`
 - Windows: `{FOLDERID_RoamingAppData}/totoro.toml`
+    ie: `<HOME>/AppData/Roaming/totoro/config.toml`
 - Mac: `$HOME/Library/Application Support`
 
 The format follows a `key` = `value` and line separated for each entry
