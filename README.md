@@ -38,3 +38,42 @@ totoro get --domain <DOMAIN>
 totoro get --domain "github"
 ```
 
+The totp value is valid for 30 seconds and is automatically copied into your clipboard.
+
+
+## Advance usage
+For additional convenience, you can set a local directory in your machine which contains a separate
+script for each specific domains
+
+Example:
+In your `~/scripts/totp/` directory you'll create a file for each of the domain
+
+```sh
+ls -lah
+```
+```sh
+fb.sh
+gmail.sh
+github.sh
+```
+Make sure all the script file as an executable permission:
+
+```sh
+cd ~/scripts/totp
+chmod u+x *.sh
+```
+
+```sh
+cat github.sh
+```
+
+```sh
+#!/bin/bash
+totoro get --domain "github"
+```
+
+Then, you if you need a totp for github. Leveraging autocompletion in the terminal, you only need to type:
+
+`cd sc<TAB>/TO<TAB>` then `./git<TAB>`
+
+
