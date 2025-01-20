@@ -1,6 +1,14 @@
 ## totoro
 a totp management tool
 
+## Prerequisite
+- [rust](https://rustup.rs/)
+
+## Installing
+```
+cargo install --git https://github.com/jcesar-betrnk/totoro
+```
+
 ## Usage
 
 Adding an entry
