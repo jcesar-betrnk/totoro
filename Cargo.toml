@@ -2,7 +2,7 @@
 name = "totoro"
 version = "0.1.0"
 edition = "2021"
-author = ["Jovansonlee Cesar <ivanceras@gmail.com>"]
+authors = ["Jovansonlee Cesar <ivanceras@gmail.com>"]
 description = "Manage totp auth for each domain in the command line"
 keywords = ["totp", "auth"]
 license = "MIT"
