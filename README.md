@@ -15,6 +15,14 @@ Alternatively, you can directly edit the configuration file:
 - Windows: `{FOLDERID_RoamingAppData}/totoro.toml`
 - Mac: `$HOME/Library/Application Support`
 
+The format follows a `key` = `value` and line separated for each entry
+
+Example:
+```
+github = "xq42qoisdhpvop2m"
+google = "goog ogogo gogole"
+```
+
 Getting a totp value
 
 ```sh
