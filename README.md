@@ -15,7 +15,7 @@ Adding an entry
 
 ```sh
 totoro add --domain <DOMAIN> --secret <SECRET>
-totoro add --domain "github" --secret "xlkasjdqjaqmx"
+totoro add --domain "github" --secret "xlkasidioqweqwp"
 ```
 
 Alternatively, you can directly edit the configuration file:
@@ -27,7 +27,7 @@ The format follows a `key` = `value` and line separated for each entry
 
 Example:
 ```
-github = "xq42qoisdhpvop2m"
+github = "xlkasidioqweqwp"
 google = "goog ogogo gogole"
 ```
 
