@@ -9,8 +9,8 @@ use std::io::Write;
 use std::path::PathBuf;
 use toml::{Table, Value};
 
-const QUAL: &str = "com";
-const ORG: &str = "ivanceras";
+const QUAL: &str = "org";
+const ORG: &str = "totoro";
 const APP: &str = env!("CARGO_PKG_NAME");
 
 #[derive(Parser, Debug)]
