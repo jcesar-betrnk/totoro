@@ -1,7 +1,6 @@
 ## totoro
 
-![totoro2](https://github.com/user-attachments/assets/8ecc6fc1-dbbf-4c20-894d-f828a62269b9)
-
+![totoro](https://github.com/user-attachments/assets/b590fe9f-ce5d-475e-af02-f978aea0fb8e)
 
 a totp management tool
 
