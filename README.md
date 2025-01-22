@@ -1,4 +1,8 @@
 ## totoro
+
+![totoro2](https://github.com/user-attachments/assets/8ecc6fc1-dbbf-4c20-894d-f828a62269b9)
+
+
 a totp management tool
 
 ## Prerequisite
