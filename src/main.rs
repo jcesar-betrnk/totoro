@@ -89,6 +89,12 @@ fn save_table_to_toml(table: &Table) -> anyhow::Result<()> {
     Ok(())
 }
 
+fn cleanup_base32(input: &str) -> anyhow::Result<String>{
+    let stage1 = input.replace("-","");
+    let stage2 = stage1.replace(" ","");
+    Ok(stage2)
+}
+
 fn copy_totp_to_clipboard(domain: &str) -> anyhow::Result<()> {
     let table = read_toml_table()?;
     let value = table.get(domain);
@@ -98,7 +104,8 @@ fn copy_totp_to_clipboard(domain: &str) -> anyhow::Result<()> {
                 panic!("must be a string");
             };
             let auth = GoogleAuthenticator::new();
-            let code = auth.get_code(&secret, 0).unwrap();
+            let cleaned_secret = cleanup_base32(secret)?;
+            let code = auth.get_code(&cleaned_secret, 0)?;
             write_to_clipboard(&code)?;
             println!("{code}");
         }
@@ -129,3 +136,13 @@ fn main() -> anyhow::Result<()> {
 
     Ok(())
 }
+
+#[test]
+fn test_cleanup(){
+    let input = "RZKU - KARK - PE5H - EZRU - HFNV - TIJT - NZNW - CZS4";
+    let output = "RZKUKARKPE5HEZRUHFNVTIJTNZNWCZS4";
+    let result = cleanup_base32(input).unwrap();
+    dbg!(&result);
+    assert_eq!(result, output);
+}
+
