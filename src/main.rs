@@ -37,6 +37,8 @@ enum Commands {
         #[arg(short, long)]
         domain: String,
     },
+    /// list all the available domains in the entry
+    List,
 }
 
 fn config_file() -> anyhow::Result<PathBuf> {
@@ -131,6 +133,12 @@ fn main() -> anyhow::Result<()> {
         }
         Commands::Get { domain } => {
             copy_totp_to_clipboard(&domain)?;
+        }
+        Commands::List => {
+            let table = read_toml_table()?;
+            for (key, _) in table{
+                println!("{key}");
+            }
         }
     }
 
