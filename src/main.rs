@@ -112,7 +112,7 @@ fn copy_totp_to_clipboard(domain: &str) -> anyhow::Result<()> {
             println!("{code}");
         }
         None => {
-            println!("There is no such domain");
+            println!("No entry for domain: {domain:?}");
         }
     }
     Ok(())
@@ -120,6 +120,9 @@ fn copy_totp_to_clipboard(domain: &str) -> anyhow::Result<()> {
 
 fn add_totp_entry(domain: &str, secret: &str) -> anyhow::Result<()> {
     let mut table = read_toml_table()?;
+    if let Some(_existing) = table.get(domain){
+        println!("Overwriting existing entry: {domain}");
+    }
     table.insert(domain.to_string(), secret.into());
     save_table_to_toml(&table)?;
     Ok(())
