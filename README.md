@@ -2,7 +2,7 @@
 
 ![totoro](https://github.com/user-attachments/assets/b590fe9f-ce5d-475e-af02-f978aea0fb8e)
 
-a totp management tool
+a totp management tool in the CLI
 
 ## Prerequisite
 - [rust](https://rustup.rs/)
@@ -30,7 +30,7 @@ Alternatively, you can directly edit the configuration file:
 The format follows a `key` = `value` and line separated for each entry
 
 Example:
-```
+```toml
 github = "NBSWY3DPEB3W64TMMQQQ"
 google = "JZXXI2DJNZTSA2DFOJSQ"
 ```
